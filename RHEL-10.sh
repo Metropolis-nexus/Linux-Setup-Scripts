@@ -103,7 +103,7 @@ sudo systemctl enable --now dnf-automatic.timer
 sudo systemctl disable --now firewalld
 sudo systemctl disable --now irqbalance
 ## rhc provides the remote remediation feature - we don't want it
-sudo dnf remove -y audit cockpit* cronie firewalld *firmware* flashrom grub2-tools-extra iptables* irqbalance hunspell* kdump-utils kpartx mdadm microcode_ctl parted pcsc* pigz pkgconf prefixdevname rhc rootfiles sg3* sssd* tpm2-tools  vim*
+sudo dnf remove -y audit 'cockpit*' cronie firewalld '*firmware*' flashrom grub2-tools-extra iptables* irqbalance 'hunspell*' kdump-utils kpartx mdadm microcode_ctl 'parted pcsc*' pigz pkgconf prefixdevname rhc rootfiles 'sg3*' 'sssd*' tpm2-tools  'vim*'
 
 # Install hardened_malloc
 # Not available on RHEL 10 yet
