@@ -115,16 +115,18 @@ sudo dnf remove -y audit cockpit* cronie firewalld *firmware* flashrom grub2-too
 # Setup insights
 sudo insights-client --register
 
-# Install nano & guest agent
-sudo dnf install -y nano qemu-guest-agent
+# Install packages
+sudo dnf install -y nano qemu-guest-agent tuned zram-generator
+
+# Setup ZRAM
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/zram-generator.conf | tee /etc/systemd/zram-generator.conf > /dev/null
+
+# Setup tuned
+sudo systemctl enable --now tuned
+sudo tuned-adm profile virtual-guest
 
 # Enable auto TRIM
 sudo systemctl enable fstrim.timer
-
-# Setup tuned
-sudo dnf install -y tuned
-sudo systemctl enable --now tuned
-sudo tuned-adm profile virtual-guest
 
 # Setup notices
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/issue | sudo tee /etc/issue > /dev/null
