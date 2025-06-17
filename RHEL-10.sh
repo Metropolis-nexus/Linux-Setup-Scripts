@@ -38,7 +38,7 @@ sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 sudo chmod 700 /home/*
 
 # Passwordless sudo
-sudo sed -i 's/# %wheel/%wheel/' /etc/sudoers
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sudoers.d/passwordless | sudo tee /etc/sudoers.d/passwordless > /dev/null
 
 # Remove nullok
 sudo /usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
