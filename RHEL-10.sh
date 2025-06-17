@@ -37,6 +37,9 @@ sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 # Make home directory private
 sudo chmod 700 /home/*
 
+# Passwordless sudo
+sudo sed -i 's/# %wheel/%wheel/' /etc/sudoers
+
 # Remove nullok
 sudo /usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
 
@@ -100,7 +103,7 @@ sudo systemctl enable --now dnf-automatic.timer
 sudo systemctl disable --now firewalld
 sudo systemctl disable --now irqbalance
 ## rhc provides the remote remediation feature - we don't want it
-sudo dnf remove -y cockpit* firewalld irqbalance rhc
+sudo dnf remove -y audit cockpit* cronie firewalld *firmware* flashrom grub2-tools-extra iptables* irqbalance hunspell* kdump-utils kpartx mdadm microcode_ctl parted pcsc* pigz pkgconf prefixdevname rhc rootfiles sg3* sssd* tpm2-tools  vim*
 
 # Install hardened_malloc
 # Not available on RHEL 10 yet
@@ -112,8 +115,8 @@ sudo dnf remove -y cockpit* firewalld irqbalance rhc
 # Setup insights
 sudo insights-client --register
 
-# Install guest agent
-sudo dnf install -y qemu-guest-agent
+# Install nano & guest agent
+sudo dnf install -y nano qemu-guest-agent
 
 # Enable auto TRIM
 sudo systemctl enable fstrim.timer
