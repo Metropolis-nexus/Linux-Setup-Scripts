@@ -87,7 +87,9 @@ sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
 # Setup DNF
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf > /dev/null
 sudo chmod 644 /etc/dnf/dnf.conf
-sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
+
+# Upgrade all packages
+sudo dnf upgrade -y
 
 # Setup automatic updates
 sudo dnf install -y dnf-automatic
@@ -95,20 +97,20 @@ sudo sed -i 's/apply_updates = no/apply_updates = yes\nreboot = when-needed/g' /
 sudo systemctl enable --now dnf-automatic.timer
 
 # Remove unnecessary packages
-sudo dnf disable --now firewalld
+sudo systemctl disable --now firewalld
 sudo systemctl disable --now irqbalance
-sudo dnf remove -y cockpit* firewalld irqbalance
+## rhc provides the remote remediation feature - we don't want it
+sudo dnf remove -y cockpit* firewalld irqbalance rhc
 
 # Install hardened_malloc
-sudo dnf copr enable secureblue/hardened_malloc -y
-sudo dnf install -y hardened_malloc
-echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
-sudo chmod 644 /etc/ld.so.preload
+# Not available on RHEL 10 yet
+#sudo dnf copr enable secureblue/hardened_malloc -y
+#sudo dnf install -y hardened_malloc
+#echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
+#sudo chmod 644 /etc/ld.so.preload
 
-# Setup yara
-sudo dnf install -y yara
-sudo insights-client --collector malware-detection
-sudo sed -i 's/test_scan: true/test_scan: false/' /etc/insights-client/malware-detection-config.yml
+# Setup insights
+sudo insights-client --register
 
 # Install guest agent
 sudo dnf install -y qemu-guest-agent
