@@ -29,5 +29,5 @@ unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/r
 systemctl restart chronyd
 
 # Configure sysctl
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/tuneables.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/99-server.conf > /dev/null
 sysctl -p
