@@ -30,7 +30,7 @@ sudo systemctl mask debug-shell.service
 # Setting umask to 077
 umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
-sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+echo "umask 077" | sudo tee -a /etc/zsh/zshrc
 
 # Setup NTS
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/chrony/conf.d/10-custom.conf | tee /etc/chrony/conf.d/10-custom.conf > /dev/null
