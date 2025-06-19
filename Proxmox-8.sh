@@ -22,7 +22,7 @@ output(){
     printf '\e[1;34m%-6s\e[m\n' "${@}"
 }
 
-# Compliance and updates
+# Compliance
 systemctl mask debug-shell.service
 
 ## Avoid phased updates
