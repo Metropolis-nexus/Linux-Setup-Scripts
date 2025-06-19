@@ -24,10 +24,45 @@ unpriv(){
     sudo -u nobody "$@"
 }
 
+# Compliance
+systemctl mask debug-shell.service
+
+# Setting umask to 077
+umask 077
+sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
+sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
+
 # Setup NTS
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/chrony/conf.d/10-custom.conf | tee /etc/chrony/conf.d/10-custom.conf > /dev/null
+chmod 644 /etc/chrony.conf
 systemctl restart chronyd
 
-# Configure sysctl
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/99-server.conf > /dev/null
-sysctl -p
+# Harden SSH
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
+sudo chmod 644 /etc/ssh/sshd_config.d/10-custom.conf
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
+sudo mkdir -p /etc/systemd/system/sshd.service.d/
+sudo chmod 755 /etc/systemd/system/sshd.service.d/
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/sshd.service.d/override.conf | sudo tee /etc/systemd/system/sshd.service.d/override.conf > /dev/null
+sudo systemctl daemon-reload
+sudo systemctl restart sshd
+
+# Rebuild initramfs
+update-initramfs -u
+
+# Kernel hardening
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/modprobe.d/server-blacklist.conf | sudo tee /etc/modprobe.d/server-blacklist.conf > /dev/null
+sudo chmod 644 /etc/modprobe.d/server-blacklist.conf
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
+sudo chmod 644 /etc/sysctl.d/99-server.conf
+sudo dracut -f
+sudo sysctl -p
+
+# Disable coredump
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
+sudo chmod 644 /etc/security/limits.d/30-disable-coredump.conf
+sudo mkdir -p /etc/systemd/coredump.conf.d
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
+sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
