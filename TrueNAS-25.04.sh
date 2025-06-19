@@ -25,17 +25,16 @@ unpriv(){
 }
 
 # Compliance
-systemctl mask debug-shell.service
+sudo systemctl mask debug-shell.service
 
 # Setting umask to 077
 umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
 sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 
 # Setup NTS
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/chrony/conf.d/10-custom.conf | tee /etc/chrony/conf.d/10-custom.conf > /dev/null
-chmod 644 /etc/chrony.conf
+chmod 644 /etc/chrony/conf.d/10-custom.conf
 systemctl restart chronyd
 
 # Harden SSH
