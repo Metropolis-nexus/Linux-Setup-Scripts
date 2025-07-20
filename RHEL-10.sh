@@ -66,6 +66,7 @@ sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/
 sudo chmod 755 /etc/systemd/system/sshd.service.d/
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/sshd.service.d/override.conf | sudo tee /etc/systemd/system/sshd.service.d/override.conf > /dev/null
+sudo chmod 644 /etc/systemd/system/sshd.service.d/override.conf
 sudo systemctl daemon-reload
 sudo systemctl restart sshd
 
