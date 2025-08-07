@@ -43,18 +43,26 @@ systemctl daemon-reload
 systemctl restart sshd
 
 # Setup repositories
-sed -i '1 {s/^/# /}' /etc/apt/sources.list.d/pve-enterprise.list
-sed -i '1 {s/^/# /}' /etc/apt/sources.list.d/ceph.list
+echo "Enabled: no" >>/etc/apt/sources.list.d/pve-enterprise.sources
+echo "Enabled: no" >>/etc/apt/sources.list.d/ceph.sources
 
-echo 'deb https://deb.debian.org/debian/ bookworm main contrib non-free non-free-firmware
+echo "Types: deb
+URIs: https://deb.debian.org/debian/
+Suites: trixie trixie-updates trixie-backports
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
-deb https://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware
+Types: deb
+URIs: https://security.debian.org/debian-security/
+Suites: trixie-security
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg" | tee /etc/apt/sources.list.d/debian.sources
 
-deb https://deb.debian.org/debian/ bookworm-updates main contrib non-free non-free-firmware
-
-deb https://deb.debian.org/debian/ bookworm-backports main contrib non-free non-free-firmware
-
-deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription' | tee /etc/apt/sources.list
+echo "Types: deb
+URIs: http://download.proxmox.com/debian/pve
+Suites: trixie
+Components: pve-no-subscription
+Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg" | tee /etc/apt/sources.list.d/proxmox.sources
 
 # Update packages
 apt-get update
