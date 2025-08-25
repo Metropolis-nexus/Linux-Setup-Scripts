@@ -50,6 +50,7 @@ sudo systemctl restart sshd
 
 # Kernel hardening
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/modprobe.d/server-blacklist.conf | sudo tee /etc/modprobe.d/server-blacklist.conf > /dev/null
+sed -i 's/^install squashfs/#install squashfs/' /etc/modprobe.d/server-blacklist.conf
 sudo chmod 644 /etc/modprobe.d/server-blacklist.conf
 unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
 sudo chmod 644 /etc/sysctl.d/99-server.conf
