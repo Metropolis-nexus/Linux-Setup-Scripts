@@ -85,7 +85,8 @@ proxmox-boot-tool refresh
 ###
 
 # Kernel hardening
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/modprobe.d/server-blacklist.conf | tee /etc/modprobe.d/server-blacklist.conf > /dev/null
+curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue-framebuffer.conf | tee /etc/modprobe.d/framebuffer-blacklist.conf > /dev/null
+curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue.conf | tee /etc/modprobe.d/server-blacklist.conf > /dev/null
 curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/99-server.conf > /dev/null
 sysctl -p /etc/sysctl.d
 
