@@ -14,6 +14,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+umask 077
+
 ujust dns-selector # Switch to systemd-resolved
 ujust set-kargs-hardening # Disable 32 bit emulation, disable hyperthread (doesn't do anything), and enable unstable kernel arguments
 ujust toggle-bash-environment-lockdown # Apply to all users
@@ -34,21 +36,21 @@ ujust toggle-gnome-extensions
 rpm-ostree install gnome-extensions-app gnome-shell-extension-appindicator gnome-shell-extension-blur-my-shell
 
 # Setup dconf
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/adw-gtk3-dark -o /etc/dconf/db/local.d/adw-gtk3-dark > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/automount-disable -o /etc/dconf/db/local.d/automount-disable > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/button-layout -o /etc/dconf/db/local.d/button-layout > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/prefer-dark -o /etc/dconf/db/local.d/prefer-dark > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy -o /etc/dconf/db/local.d/privacy > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/touchpad -o /etc/dconf/db/local.d/touchpad > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/adw-gtk3-dark -o /etc/dconf/db/local.d/adw-gtk3-dark > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/automount-disable -o /etc/dconf/db/local.d/automount-disable > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/button-layout -o /etc/dconf/db/local.d/button-layout > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/prefer-dark -o /etc/dconf/db/local.d/prefer-dark > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/privacy -o /etc/dconf/db/local.d/privacy > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/touchpad -o /etc/dconf/db/local.d/touchpad > /dev/null
 chmod 644 /etc/dconf/db/local.d/*
 
 mkdir -p /etc/dconf/db/local.d/locks
 chmod 755 /etc/dconf/db/local.d/locks
 
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable -o /etc/dconf/db/local.d/locks/automount-disable > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy -o /etc/dconf/db/local.d/locks/privacy > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/locks/automount-disable -o /etc/dconf/db/local.d/locks/automount-disable > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/locks/privacy -o /etc/dconf/db/local.d/locks/privacy > /dev/null
 chmod 644 /etc/dconf/db/local.d/locks/*
 
 umask 022
-conf update
+dconf update
 umask 077
