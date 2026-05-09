@@ -50,3 +50,6 @@ curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc
 run0 chmod 644 /etc/dconf/db/local.d/locks/*
 
 run0 bash -c "umask 022 && dconf update"
+
+# Setup tuned
+tuned-adm profile virtual-guest
