@@ -26,7 +26,7 @@ ujust set-bluetooth-modules off
 ujust set-brew off
 ujust set-dhcp-hostname-sending off
 ujust set-libvirt-daemons off
-ujust set-xwayland off
+ujust set-xwayland on # Needed for VMWare shared clipboard
 
 ujust enable-flathub-unfiltered
 ujust flatpak-permissions-lockdown
