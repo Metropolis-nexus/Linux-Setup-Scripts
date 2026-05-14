@@ -88,6 +88,7 @@ proxmox-boot-tool refresh
 curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue-framebuffer.conf | tee /etc/modprobe.d/framebuffer-blacklist.conf > /dev/null
 curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue.conf | tee /etc/modprobe.d/server-blacklist.conf > /dev/null
 curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/99-server.conf > /dev/null
+sed -i 's/^kernel.io_uring_disabled/#kernel.io_uring_disabled/g' /etc/sysctl.d/99-server.conf
 sysctl -p /etc/sysctl.d
 
 # Rebuild initramfs
