@@ -51,5 +51,8 @@ run0 chmod 644 /etc/dconf/db/local.d/locks/*
 
 run0 bash -c "umask 022 && dconf update"
 
+# Fix dark theme
+flatpak install adw-gtk3-dark
+
 # Setup tuned
 tuned-adm profile virtual-guest
