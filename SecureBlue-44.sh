@@ -27,7 +27,7 @@ ujust set-libvirt-daemons off
 ujust set-xwayland on # Needed for VMWare shared clipboard
 
 ujust enable-flathub-unfiltered
-ujust flatpak-permissions-lockdown
+# ujust flatpak-permissions-lockdown
 ujust harden-flatpak
 
 ujust toggle-gnome-extensions
