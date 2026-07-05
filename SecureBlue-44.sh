@@ -37,6 +37,10 @@ ujust harden-flatpak
 ujust toggle-gnome-extensions
 rpm-ostree install gnome-extensions-app gnome-shell-extension-appindicator gnome-shell-extension-blur-my-shell
 
+# Harden SSH
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf | run0 tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+run0 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
+
 # Setup dconf
 curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/adw-gtk3-dark | run0 tee /etc/dconf/db/local.d/adw-gtk3-dark > /dev/null
 curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/automount-disable | run0 tee /etc/dconf/db/local.d/automount-disable > /dev/null
@@ -57,6 +61,3 @@ run0 bash -c "umask 022 && dconf update"
 
 # Fix dark theme
 flatpak install adw-gtk3-dark
-
-# Setup tuned
-tuned-adm profile virtual-guest
