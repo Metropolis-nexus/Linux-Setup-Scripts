@@ -16,6 +16,8 @@
 
 # Meant for Secureblue on VMWare Fusion on Apple Silicon Macs
 
+set -e
+
 ujust dns-selector # Switch to systemd-resolved
 ujust set-kargs-hardening # Disable 32 bit emulation, disable hyperthread (doesn't do anything), and enable unstable kernel arguments
 ujust toggle-bash-environment-lockdown # Apply to all users
