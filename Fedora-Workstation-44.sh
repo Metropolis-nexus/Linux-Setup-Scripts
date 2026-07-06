@@ -198,6 +198,12 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.re
     sudo chmod 755 /usr/local/share/applications
     sed 's/^Exec=\/usr\/bin\/microsoft-edge-stable/& --ozone-platform=wayland --start-maximized/g' /usr/share/applications/microsoft-edge.desktop | sudo tee /usr/local/share/applications/microsoft-edge.desktop
     sudo chmod 644 /usr/local/share/applications/microsoft-edge.desktop
+else
+    unpriv curl https://repo.secureblue.dev/secureblue.repo | sudo tee /etc/yum.repos.d/secureblue.repo
+    sudo chmod 644 /etc/yum.repos.d/secureblue.repo
+    echo "includepkgs=trivalent
+priority=20" | sudo tee -a '/etc/yum.repos.d/secureblue.repo'
+    sudo dnf install -y trivalent
 fi
 
 # Enable auto TRIM
