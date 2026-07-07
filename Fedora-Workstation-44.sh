@@ -14,7 +14,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-# Meant for Fedora on VMWare Fusion on Apple Silicon Macs
+# Meant for quickly spinning up my personal Fedora Workstation instances.
+# This is mainly written for VMWare Fusion on Apple Silicon.
 
 set -e
 
