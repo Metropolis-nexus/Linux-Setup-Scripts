@@ -61,3 +61,6 @@ run0 bash -c "umask 022 && dconf update"
 
 # Fix dark theme
 flatpak install adw-gtk3-dark
+
+# Remove unwanted packages
+rpm-ostree override remove virt-manager
