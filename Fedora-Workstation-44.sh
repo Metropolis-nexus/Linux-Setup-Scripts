@@ -165,8 +165,10 @@ sudo dnf copr enable secureblue/packages -y
 echo "includepkgs=hardened_malloc
 priority=20" | sudo tee -a '/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:packages.repo'
 sudo dnf install -y hardened_malloc
-echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
-sudo chmod 644 /etc/ld.so.preload
+
+## https://gitlab.gnome.org/GNOME/glycin/-/work_items/209#note_2812044
+#echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
+#sudo chmod 644 /etc/ld.so.preload
 
 # Install packages that I use
 sudo dnf -y install adw-gtk3-theme gnome-extensions-app gnome-shell-extension-appindicator gnome-shell-extension-blur-my-shell
