@@ -30,12 +30,13 @@ ujust set-dhcp-hostname-sending off
 ujust set-libvirt-daemons off
 ujust set-xwayland on # Needed for VMWare shared clipboard
 
-ujust enable-flathub-unfiltered
+ujust set-flathub-unfiltered
 # ujust flatpak-permissions-lockdown
 ujust harden-flatpak
 
 ujust toggle-gnome-extensions
 rpm-ostree install gnome-extensions-app gnome-shell-extension-appindicator gnome-shell-extension-blur-my-shell
+rpm-ostree override remove virt-manager
 
 # Harden SSH
 curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf | run0 tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
@@ -61,6 +62,3 @@ run0 bash -c "umask 022 && dconf update"
 
 # Fix dark theme
 flatpak install adw-gtk3-dark
-
-# Remove unwanted packages
-rpm-ostree override remove virt-manager
