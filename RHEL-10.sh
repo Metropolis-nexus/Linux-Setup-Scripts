@@ -38,16 +38,16 @@ sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 sudo chmod 700 /home/*
 
 # Passwordless sudo
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sudoers.d/passwordless | sudo tee /etc/sudoers.d/passwordless > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/sudoers.d/passwordless | sudo tee /etc/sudoers.d/passwordless > /dev/null
 
 # Remove nullok
 sudo /usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
 
 # Setup NTS
 sudo dnf install -y chrony
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/chrony.conf | sudo tee /etc/chrony.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/chrony.conf | sudo tee /etc/chrony.conf > /dev/null
 sudo chmod 644 /etc/chrony.conf
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysconfig/chronyd | sudo tee /etc/sysconfig/chronyd > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/sysconfig/chronyd | sudo tee /etc/sysconfig/chronyd > /dev/null
 sudo chmod 644 /etc/sysconfig/chronyd
 sudo systemctl restart chronyd
 
@@ -59,13 +59,13 @@ sudo systemctl daemon-reload
 sudo systemctl restart NetworkManager
 
 # Harden SSH
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/sshd_config.d/10-custom.conf
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/
 sudo chmod 755 /etc/systemd/system/sshd.service.d/
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/sshd.service.d/override.conf | sudo tee /etc/systemd/system/sshd.service.d/override.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/systemd/system/sshd.service.d/override.conf | sudo tee /etc/systemd/system/sshd.service.d/override.conf > /dev/null
 sudo chmod 644 /etc/systemd/system/sshd.service.d/override.conf
 sudo systemctl daemon-reload
 sudo systemctl restart sshd
@@ -75,7 +75,7 @@ unpriv curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/file
 sudo chmod 644 /etc/modprobe.d/framebuffer-blacklist.conf
 unpriv curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue.conf | sudo tee /etc/modprobe.d/server-blacklist.conf > /dev/null
 sudo chmod 644 /etc/modprobe.d/server-blacklist.conf
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
 sudo chmod 644 /etc/sysctl.d/99-server.conf
 sudo dracut -f
 sudo sysctl -p
@@ -84,14 +84,14 @@ sudo sysctl -p
 sudo grubby --update-kernel=ALL --args='mitigations=auto,nosmt nosmt=force spectre_v2=on spectre_bhi=on spec_store_bypass_disable=on tsx=off l1d_flush=on l1tf=full,force kvm-intel.vmentry_l1d_flush=always spec_rstack_overflow=safe-ret gather_data_sampling=force reg_file_data_sampling=on kvm.nx_huge_pages=force amd_iommu=force_isolation intel_iommu=on iommu=force iommu.strict=1 iommu.passthrough=0 efi=disable_early_pci_dma slab_nomerge init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on randomize_kstack_offset=on lockdown=confidentiality module.sig_enforce=1 oops=panic vsyscall=none ia32_emulation=0 debugfs=off random.trust_bootloader=off random.trust_cpu=off console=tty0 console=ttyS0,115200'
 
 # Disable coredump
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
 sudo chmod 644 /etc/security/limits.d/30-disable-coredump.conf
 sudo mkdir -p /etc/systemd/coredump.conf.d
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
 sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
 
 # Setup DNF
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf > /dev/null
 sudo chmod 644 /etc/dnf/dnf.conf
 
 # Upgrade all packages
@@ -123,7 +123,7 @@ sudo insights-client --register
 sudo dnf install -y nano qemu-guest-agent tuned zram-generator
 
 # Setup ZRAM
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf > /dev/null
 
 # Setup tuned
 sudo systemctl enable --now tuned
@@ -133,7 +133,7 @@ sudo tuned-adm profile virtual-guest
 sudo systemctl enable fstrim.timer
 
 # Setup notices
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/issue | sudo tee /etc/issue > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/issue | sudo tee /etc/issue > /dev/null
 sudo chmod 644 /etc/issue
-unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/issue | sudo tee /etc/issue.net > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/issue | sudo tee /etc/issue.net > /dev/null
 sudo chmod 644 /etc/issue.net

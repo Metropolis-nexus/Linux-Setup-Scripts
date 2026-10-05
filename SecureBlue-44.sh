@@ -39,23 +39,23 @@ rpm-ostree install gnome-extensions-app gnome-shell-extension-appindicator gnome
 rpm-ostree override remove virt-manager
 
 # Harden SSH
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf | run0 tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/ssh/ssh_config.d/10-custom.conf | run0 tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 run0 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Setup dconf
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/adw-gtk3-dark | run0 tee /etc/dconf/db/local.d/adw-gtk3-dark > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/automount-disable | run0 tee /etc/dconf/db/local.d/automount-disable > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/button-layout | run0 tee /etc/dconf/db/local.d/button-layout > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/prefer-dark | run0 tee /etc/dconf/db/local.d/prefer-dark > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/privacy | run0 tee /etc/dconf/db/local.d/privacy > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/touchpad | run0 tee /etc/dconf/db/local.d/touchpad > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/adw-gtk3-dark | run0 tee /etc/dconf/db/local.d/adw-gtk3-dark > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/automount-disable | run0 tee /etc/dconf/db/local.d/automount-disable > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/button-layout | run0 tee /etc/dconf/db/local.d/button-layout > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/prefer-dark | run0 tee /etc/dconf/db/local.d/prefer-dark > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/privacy | run0 tee /etc/dconf/db/local.d/privacy > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/touchpad | run0 tee /etc/dconf/db/local.d/touchpad > /dev/null
 run0 chmod 644 /etc/dconf/db/local.d/*
 
 run0 mkdir -p /etc/dconf/db/local.d/locks
 run0 chmod 755 /etc/dconf/db/local.d/locks
 
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/locks/automount-disable | run0 tee /etc/dconf/db/local.d/locks/automount-disable > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/dconf/db/local.d/locks/privacy | run0 tee /etc/dconf/db/local.d/locks/privacy > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/locks/automount-disable | run0 tee /etc/dconf/db/local.d/locks/automount-disable > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/dconf/db/local.d/locks/privacy | run0 tee /etc/dconf/db/local.d/locks/privacy > /dev/null
 run0 chmod 644 /etc/dconf/db/local.d/locks/*
 
 run0 bash -c "umask 022 && dconf update"
