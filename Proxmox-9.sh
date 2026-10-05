@@ -108,12 +108,12 @@ sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/
 systemctl restart pveproxy.service
 
 # Configure automatic updates
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/apt/apt.conf.d/52unattended-upgrades-local | tee /etc/apt/apt.conf.d/52unattended-upgrades-local > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/apt/apt.conf.d/52unattended-upgrades-local | tee /etc/apt/apt.conf.d/52unattended-upgrades-local > /dev/null
 
 # Add autosnap services
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/systemd/system/autosnap%40.service | tee /etc/systemd/system/autosnap@.service > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/systemd/system/autosnap-daily%40.timer | tee /etc/systemd/system/autosnap-daily@.timer > /dev/null
-curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/systemd/system/autosnap-weekly%40.timer | tee /etc/systemd/system/autosnap-weekly@.timer > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/systemd/system/autosnap%40.service | tee /etc/systemd/system/autosnap@.service > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/systemd/system/autosnap-daily%40.timer | tee /etc/systemd/system/autosnap-daily@.timer > /dev/null
+curl -s https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/master/etc/systemd/system/autosnap-weekly%40.timer | tee /etc/systemd/system/autosnap-weekly@.timer > /dev/null
 
 # Setup tuned
 tuned-adm profile virtual-host

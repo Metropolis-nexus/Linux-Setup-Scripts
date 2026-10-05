@@ -194,8 +194,8 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.re
     sudo dnf install -y microsoft-edge-stable
     sudo mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended/
     sudo chmod -R 755 /etc/opt
-    unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json | sudo tee /etc/opt/edge/policies/managed/managed.json > /dev/null
-    unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json | sudo tee /etc/opt/edge/policies/recommended/recommended.json > /dev/null
+    unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/master/Linux/managed.json | sudo tee /etc/opt/edge/policies/managed/managed.json > /dev/null
+    unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/master/Linux/recommended.json | sudo tee /etc/opt/edge/policies/recommended/recommended.json > /dev/null
     sudo chmod 644 /etc/opt/edge/policies/managed/managed.json /etc/opt/edge/policies/recommended/recommended.json
     sudo mkdir -p /usr/local/share/applications
     sudo chmod 755 /usr/local/share/applications
